@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "projects": {
+    "nx-learn": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/nx-learn",
+      "sourceRoot": "apps/nx-learn/src",
+      "prefix": "nx-learn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/nx-learn",
+            "index": "apps/nx-learn/src/index.html",
+            "main": "apps/nx-learn/src/main.ts",
+            "polyfills": "apps/nx-learn/src/polyfills.ts",
+            "tsConfig": "apps/nx-learn/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "apps/nx-learn/src/favicon.ico",
+              "apps/nx-learn/src/assets"
+            ],
+            "styles": ["apps/nx-learn/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/nx-learn/src/environments/environment.ts",
+                  "with": "apps/nx-learn/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "nx-learn:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "nx-learn:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "nx-learn:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/nx-learn/tsconfig.app.json",
+              "apps/nx-learn/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/nx-learn/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/nx-learn/jest.config.js",
+            "tsConfig": "apps/nx-learn/tsconfig.spec.json",
+            "setupFile": "apps/nx-learn/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "nx-learn-e2e": {
+      "root": "apps/nx-learn-e2e",
+      "sourceRoot": "apps/nx-learn-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/nx-learn-e2e/cypress.json",
+            "tsConfig": "apps/nx-learn-e2e/tsconfig.e2e.json",
+            "devServerTarget": "nx-learn:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "nx-learn:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/nx-learn-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/nx-learn-e2e/**"]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "schematics": {
+    "@nrwl/angular:application": {
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "unitTestRunner": "jest"
+    }
+  },
+  "defaultProject": "nx-learn"
+}
