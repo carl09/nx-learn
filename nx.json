@@ -13,6 +13,15 @@
     },
     "nx-learn": {
       "tags": []
+    },
+    "lib-text": {
+      "tags": []
+    },
+    "stencil-lib": {
+      "tags": []
+    },
+    "web-comps": {
+      "tags": []
     }
   }
 }

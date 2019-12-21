@@ -15,7 +15,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@nx-learn/lib-text": ["libs/lib-text/src/index.ts"],
+      "@nx-learn/stencil-lib": ["libs/stencil-lib/src/index.ts"],
+      "@nx-learn/web-comps": ["libs/web-comps/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

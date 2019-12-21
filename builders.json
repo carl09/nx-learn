@@ -1,0 +1,9 @@
+{
+    "builders": {
+      "command": {
+        "implementation": "./dist/apps/lib-text",
+        "schema": "./dist/apps/lib-text/schema.json",
+        "description": "Runs any command line in the operating system."
+      }
+    }
+  }

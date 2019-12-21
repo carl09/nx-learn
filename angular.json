@@ -123,6 +123,113 @@
           }
         }
       }
+    },
+    "lib-text": {
+      "root": "libs/lib-text",
+      "sourceRoot": "libs/lib-text/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/workspace:run-commands",
+          "options": {
+            "commands": [
+              {
+                "command": "npx ts-node --project tools/tsconfig.tools.json tools/scripts/builders --project libs/lib-text --outputPath dist/apps/lib-text"
+              }
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/lib-text/tsconfig.lib.json",
+              "libs/lib-text/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lib-text/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lib-text/jest.config.js",
+            "tsConfig": "libs/lib-text/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "stencil-lib": {
+      "root": "libs/stencil-lib",
+      "sourceRoot": "libs/stencil-lib/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": ".:command",
+          "options": {
+            "outputPath": "dist/libs/stencil-lib/",
+            "index": "libs/stencil-lib/src/index.html",
+            "main": "apps/nx-learn/src/main.ts",
+            "tsConfig": "libs/stencil-lib//tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/stencil-lib/tsconfig.lib.json",
+              "libs/stencil-lib/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/stencil-lib/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/stencil-lib/jest.config.js",
+            "tsConfig": "libs/stencil-lib/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "web-comps": {
+      "projectType": "library",
+      "root": "libs/web-comps",
+      "sourceRoot": "libs/web-comps/src",
+      "prefix": "nx-learn",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/web-comps/tsconfig.lib.json",
+            "project": "libs/web-comps/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/web-comps/tsconfig.lib.json",
+              "libs/web-comps/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/web-comps/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/web-comps/jest.config.js",
+            "tsConfig": "libs/web-comps/tsconfig.spec.json",
+            "setupFile": "libs/web-comps/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {
